@@ -705,6 +705,19 @@ int parse_mixers(libconfig::Setting &mx) {
 		}
 		mixer_t *mixer = &mixers[mm];
 		debug_print("mm=%d name=%s\n", mm, name);
+
+                // should this be a scanning mixer?
+		if(mx[i].exists("is_scanner") && (bool)mx[i]["is_scanner"] == true) {
+                  mixer->is_scanner=true;
+	          debug_print("Enabling scanning mixer mode. So this is a special mixer.");
+                  cerr<<"Mixer "<<name<<": Enabling scanning mixer mode. So this is a special mixer.\n";
+                } else {
+                  mixer->is_scanner=false;
+	          debug_print("Disabling scanning mixer mode. So this is a normal mixer.");
+                  cerr<<"Mixer "<<name<<": Disabling scanning mixer mode. So this is a normal mixer.\n";
+                }
+
+
 		mixer->enabled = false;
 		mixer->name = strdup(name);
 		mixer->interval = MIX_DIVISOR;

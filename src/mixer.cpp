@@ -159,8 +159,9 @@ void *mixer_thread(void *param) {
 			if(mixer->enabled == false) continue;
 
                         // do we have the scanner mixer? currently identified by its name "scanner". (experimental)
-                        if(!strcmp(mixer->name, "scanner")) {
-                        	mixer->is_scanner = true;
+//                        if(!strcmp(mixer->name, "scanner")) {
+                        if(mixer->is_scanner) {
+//                        	mixer->is_scanner = true;
                         	if (mixer->hold_count > 0) {
                         		// scanner is still holding on an input but count down runs...
                             		mixer->hold_count--;
